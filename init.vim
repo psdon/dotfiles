@@ -51,7 +51,7 @@ au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 let g:ctrlp_custom_ignore = '__pycache__\|static' 
 
 " sort imports
-nnoremap <leader>si :CocCommand python.sortImports<cr>
+nnoremap <leader>si :CocCommand pyright.organizeimports<cr>
 
 " COC.nvim
 set updatetime=300
