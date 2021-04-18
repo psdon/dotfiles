@@ -1,9 +1,10 @@
 set nocompatible
-filetype off
+filetype plugin on
 set clipboard=unnamed
 set encoding=utf-8
 set number relativenumber
 set noswapfile
+set nowrap
 set hidden
 
 " global
@@ -29,7 +30,7 @@ syntax on
 let python_highlight_all=1
 
 " File Formating
-au BufNewFile,BufRead *.py:
+au BufNewFile,BufRead *.py,*.wiki
     \ set tabstop=4 |
     \ set softtabstop=4 |
     \ set shiftwidth=4 |
@@ -38,7 +39,7 @@ au BufNewFile,BufRead *.py:
     \ set autoindent |
     \ set fileformat=unix |
 
-au BufNewFile,BufRead *.js,*.html,*.css,*.yml:
+au BufNewFile,BufRead *.js,*.html,*.css,*.yml
     \ set tabstop=2 |
     \ set softtabstop=2 |
     \ set shiftwidth=2 |
@@ -174,8 +175,9 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+Plug 'vimwiki/vimwiki'
+
 call plug#end()
-filetype plugin indent on
 
 if has('gui_running')
   set background=dark
@@ -184,4 +186,6 @@ else
   colorscheme zenburn
 endif
 
-
+" VimWiki
+let g:vimwiki_list=[{'path': '~/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
