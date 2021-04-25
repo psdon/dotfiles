@@ -1,10 +1,12 @@
 set nocompatible
 filetype plugin on
 set clipboard=unnamed
+set textwidth=0
 set encoding=utf-8
 set number relativenumber
 set noswapfile
 set nowrap
+set nolist
 set hidden
 
 " global
@@ -34,7 +36,7 @@ au BufNewFile,BufRead *.py,*.wiki
     \ set tabstop=4 |
     \ set softtabstop=4 |
     \ set shiftwidth=4 |
-    \ set textwidth=80 |
+    \ set textwidth=0 |
     \ set expandtab |
     \ set autoindent |
     \ set fileformat=unix |
@@ -52,7 +54,10 @@ au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 let g:ctrlp_custom_ignore = '__pycache__\|static' 
 
 " sort imports
-nnoremap <leader>si :CocCommand pyright.organizeimports<cr>
+nnoremap <leader>si :CocCommand python.sortImports<cr>
+
+" run linting
+nnoremap <leader>rl :CocCommand python.runLinting<cr>
 
 " COC.nvim
 set updatetime=300
