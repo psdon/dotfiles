@@ -1,9 +1,8 @@
 set nocompatible
 filetype plugin on
-set clipboard=unnamed
 set textwidth=0
 set encoding=utf-8
-set number relativenumber
+set relativenumber
 set noswapfile
 set nowrap
 set nolist
