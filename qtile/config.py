@@ -54,44 +54,44 @@ keys = [
     Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
 
     # MonadTall Shrink and Grow
-    Key([mod, "control"], "h", 
+    Key([mod, "control"], "h",
         lazy.layout.shrink(),
         lazy.layout.decrease_nmaster(),
         desc='Shrink window (MonadTall), decrease number in master pane (Tile)'
     ),
-    Key([mod, "control"], "l", 
+    Key([mod, "control"], "l",
         lazy.layout.grow(),
         lazy.layout.increase_nmaster(),
-        desc='Expand window (MonadTall), increase number in master pane (Tile)'    
+        desc='Expand window (MonadTall), increase number in master pane (Tile)'
     ),
 
     Key([mod, "control"], "j", lazy.layout.grow_down(),
         desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
 
-    Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
-	Key([mod, "shift"], "f",
-		 lazy.window.toggle_floating(),
-		 desc='toggle floating'
-		 ),
-	Key([mod], "f",
-	 lazy.window.toggle_fullscreen(),
-	 desc='toggle fullscreen'
-	 ),
-	### Stack controls
-	Key([mod, "shift"], "Tab",
-	 lazy.layout.rotate(),
-	 lazy.layout.flip(),
-	 desc='Switch which side main pane occupies (XmonadTall)'
-	 ),
-	Key([mod], "space",
-	 lazy.layout.next(),
-	 desc='Switch window focus to other pane(s) of stack'
-	 ),
-	Key([mod, "shift"], "space",
-	 lazy.layout.toggle_split(),
-	 desc='Toggle between split and unsplit sides of stack'
-	 ),
+    Key([mod], "n", lazy.layout.reset(), desc="Reset all window sizes"),
+    Key([mod, "shift"], "f",
+             lazy.window.toggle_floating(),
+             desc='toggle floating'
+             ),
+    Key([mod], "f",
+     lazy.window.toggle_fullscreen(),
+     desc='toggle fullscreen'
+     ),
+    ### Stack controls
+    Key([mod, "shift"], "Tab",
+     lazy.layout.rotate(),
+     lazy.layout.flip(),
+     desc='Switch which side main pane occupies (XmonadTall)'
+     ),
+    Key([mod], "space",
+     lazy.layout.next(),
+     desc='Switch window focus to other pane(s) of stack'
+     ),
+    Key([mod, "shift"], "space",
+     lazy.layout.toggle_split(),
+     desc='Toggle between split and unsplit sides of stack'
+     ),
 
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
@@ -101,14 +101,14 @@ keys = [
         desc="Toggle between split and unsplit sides of stack"),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
 
+    Key([mod], "r", lazy.spawn("dmenu_run -p 'Run: '"), desc="Launch dmenu"),
+
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
 
     Key([mod, "control"], "r", lazy.restart(), desc="Restart Qtile"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "r", lazy.spawncmd(),
-        desc="Spawn a command using a prompt widget"),
 ]
 
 groups = [Group(i) for i in "123456789"]
@@ -129,7 +129,7 @@ for i in groups:
     ])
 
 layout_theme = {"border_width": 2,
-                "margin": 8,
+                "margin": 5,
                 "border_focus": "e1acff",
                 "border_normal": "1D2330"
                 }
@@ -149,7 +149,7 @@ layouts = [
     layout.Stack(num_stacks=2),
     layout.RatioTile(**layout_theme),
     layout.TreeTab(
-         font = "Ubuntu",
+         font = "Monospace",
          fontsize = 10,
          sections = ["FIRST", "SECOND", "THIRD", "FOURTH"],
          section_fontsize = 10,
@@ -173,11 +173,20 @@ layouts = [
 
 
 widget_defaults = dict(
-    font='sans',
+    font='Monospace',
     fontsize=12,
     padding=3,
 )
 extension_defaults = widget_defaults.copy()
+
+colors = [["#282c34", "#282c34"], # panel background
+          ["#3d3f4b", "#434758"], # background for current screen tab
+          ["#ffffff", "#ffffff"], # font color for group names
+          ["#ff5555", "#ff5555"], # border line color for current tab
+          ["#74438f", "#74438f"], # border line color for 'other tabs' and color for 'odd widgets'
+          ["#4f76c7", "#4f76c7"], # color for the 'even widgets'
+          ["#e1acff", "#e1acff"], # window name
+          ["#ecbbfb", "#ecbbfb"]] # backbround for inactive screens
 
 screens = [
     Screen(
@@ -193,8 +202,6 @@ screens = [
                     },
                     name_transform=lambda name: name.upper(),
                 ),
-                widget.TextBox("default config", name="default"),
-                widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
                 widget.Systray(),
                 widget.Clock(format='%Y-%m-%d %a %I:%M %p'),
                 widget.QuickExit(),
