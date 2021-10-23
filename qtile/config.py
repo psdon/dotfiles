@@ -35,6 +35,9 @@ mod = "mod4"
 terminal = guess_terminal()
 
 keys = [
+    # Take screenshot
+    Key([], "Print", lazy.spawn("scrot -q 100 -e 'mv $f ~/Pictures/screenshots/'")),
+
     # Switch between windows
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
@@ -146,29 +149,29 @@ layouts = [
     #layout.Zoomy(**layout_theme),
     layout.MonadTall(**layout_theme),
     layout.Max(**layout_theme),
-    layout.Stack(num_stacks=2),
-    layout.RatioTile(**layout_theme),
-    layout.TreeTab(
-         font = "Monospace",
-         fontsize = 10,
-         sections = ["FIRST", "SECOND", "THIRD", "FOURTH"],
-         section_fontsize = 10,
-         border_width = 2,
-         bg_color = "1c1f24",
-         active_bg = "c678dd",
-         active_fg = "000000",
-         inactive_bg = "a9a1e1",
-         inactive_fg = "1c1f24",
-         padding_left = 0,
-         padding_x = 0,
-         padding_y = 5,
-         section_top = 10,
-         section_bottom = 20,
-         level_shift = 8,
-         vspace = 3,
-         panel_width = 200
-         ),
-    layout.Floating(**layout_theme)
+    # layout.Stack(num_stacks=2),
+    # layout.RatioTile(**layout_theme),
+    # layout.TreeTab(
+         # font = "Monospace",
+         # fontsize = 10,
+         # sections = ["FIRST", "SECOND", "THIRD", "FOURTH"],
+         # section_fontsize = 10,
+         # border_width = 2,
+         # bg_color = "1c1f24",
+         # active_bg = "c678dd",
+         # active_fg = "000000",
+         # inactive_bg = "a9a1e1",
+         # inactive_fg = "1c1f24",
+         # padding_left = 0,
+         # padding_x = 0,
+         # padding_y = 5,
+         # section_top = 10,
+         # section_bottom = 20,
+         # level_shift = 8,
+         # vspace = 3,
+         # panel_width = 200
+         # ),
+    # layout.Floating(**layout_theme)
 ]
 
 
